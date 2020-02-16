@@ -1,0 +1,57 @@
+version: '3'
+
+services:
+
+    mysql:
+        image: mysql:5.7
+        restart: always
+        command: mysqld --character-set-server=utf8 --collation-server=utf8_general_ci       
+        container_name: particlecell-mysql
+        environment:
+            - "MYSQL_ALLOW_EMPTY_PASSWORD=yes"
+            - "MYSQL_ROOT_PASSWORD=secret"
+            - "MYSQL_DATABASE=particlecell"
+        ports:
+            - "3309:3306"
+        volumes:
+            - ./mysql-data/data/mysql:/var/lib/mysql
+
+    api:
+        build:
+          context: ./particlecell-api
+          dockerfile: api.dockerfile
+        container_name: particlecell-api
+        ports:
+          - "5001:5000"
+        depends_on:
+          - "mysql"
+        links:
+          - "mysql"
+        environment:
+            - "DB_PORT=3306"
+            - "DB_HOST=particlecell-mysql"
+        volumes:
+          - ./particlecell-api/app:/app
+
+    web:
+        build:
+            context: ./particlecell-web
+            dockerfile: web.dockerfile
+        container_name: particlecell-web
+        ports:
+          - "3006:3000"
+        volumes:
+          - ./particlecell-web/:/app/
+
+    # elasticsearch:
+    #   container_name: machinecore-search
+    #   image: docker.elastic.co/elasticsearch/elasticsearch:6.3.0
+    #   volumes: # Persist ES data in seperate "esdata" volume
+    #     - ./machinecore-search/:/usr/share/elasticsearch/data
+    #   environment:
+    #     - bootstrap.memory_lock=true
+    #     - "ES_JAVA_OPTS=-Xms750m -Xmx750m"
+    #     - discovery.type=single-node
+    #   ports: # Expose Elasticsearch ports
+    #     - "9300:9300"
+    #     - "9200:9200" 
