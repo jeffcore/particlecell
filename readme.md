@@ -12,5 +12,5 @@ Platform for quick retrieval of repetitive information.
 
 
 #### Credits
-* (https://realworld.svelte.dev)&nbsp;[RealWorld Svelte](https://github.com/gothinkster/realworld)
-* (https://circleci.com/gh/gothinkster/flask-realworld-example-app.png)&nbsp;[RealWorld Flask](https://circleci.com/gh/gothinkster/flask-realworld-example-app.png)
+* [RealWorld Svelte](https://github.com/gothinkster/realworld)
+* [RealWorld Flask](https://circleci.com/gh/gothinkster/flask-realworld-example-app.png)
