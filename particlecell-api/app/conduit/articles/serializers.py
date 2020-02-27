@@ -1,5 +1,5 @@
 # coding: utf-8
-
+import sys
 from marshmallow import Schema, fields, pre_load, post_dump
 
 from conduit.profile.serializers import ProfileSchema
@@ -44,7 +44,14 @@ class ArticleSchemas(ArticleSchema):
 
     @post_dump(pass_many=True)
     def dump_articles(self, data, many, **kwargs):
-        return {'articles': data, 'articlesCount': len(data)}
+        if len(data) == None:
+            articlesCount = 0
+        else:
+            articlesCount = len(data)
+
+        print("article count " + str(len(data)), file=sys.stderr)
+    
+        return {'articles': data, 'articlesCount': articlesCount}
 
 
 class CommentSchema(Schema):

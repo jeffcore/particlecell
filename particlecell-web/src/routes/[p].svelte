@@ -8,7 +8,9 @@
 
 <script>
 	import Home from './_components/Home.svelte';
-	export let p;
+	export let p=1;
+	console.log("p in p slug " + p);
+	
 </script>
 
 <Home {p}/>

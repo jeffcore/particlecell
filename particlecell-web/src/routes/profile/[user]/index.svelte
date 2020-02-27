@@ -20,7 +20,7 @@
 </script>
 
 <svelte:head>
-	<title>{profile.username} • Conduit</title>
+	<title>{profile.username}</title>
 </svelte:head>
 
 <Profile {profile} {favorites} user={$session.user}/>

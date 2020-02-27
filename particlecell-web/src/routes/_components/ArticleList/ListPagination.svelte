@@ -1,18 +1,18 @@
 <script>
-	export let articlesCount;
-	export let page;
+	export let articlesCount = 0;
+	export let page = 1;
 
 	let range;
 
 	$: {
 		range = [];
-		for (let i = 0; i < Math.ceil(articlesCount / 5); ++i) {
+		for (let i = 0; i < Math.ceil(articlesCount / 10); ++i) {
 			range.push(i);
 		}
 	}
 </script>
 
-{#if articlesCount > 5}
+{#if articlesCount > 10}
 	<nav>
 		<ul class="pagination">
 			{#each range as v}

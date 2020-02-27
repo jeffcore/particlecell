@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import MainView from './MainView/index.svelte';
 	import Tags from './Tags.svelte';
+	import Nav from './Nav.svelte';
 	import * as api from 'api.js';
 
 	export let p = 1;
@@ -21,27 +22,22 @@
 </script>
 
 <svelte:head>
-	<title>Conduit</title>
+	<title>particleCell</title>
 </svelte:head>
 
-<div class="home-page">
-	<div class="banner">
-		<div class="container">
-			<h1 class="logo-font">conduit</h1>
-			<p>A place to share your knowledge.</p>
-		</div>
-	</div>
+<Nav />
 
+<div class="home-page">
 	<div class="container page">
 		<div class="row">
 			<MainView {p} {tag} bind:tab />
 
-			<div class="col-md-3">
+			<!-- <div class="col-md-3">
 				<div class="sidebar">
 					<p>Popular Tags</p>
 					<Tags {tags} on:select='{setTags}' />
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 </div>

@@ -3,27 +3,31 @@
 	import ArticlePreview from './ArticlePreview.svelte';
 	import ListPagination from './ListPagination.svelte';
 	import * as api from 'api.js';
-
+	
 	export let tab, username = false;
 	export let favorites = false;
 	export let tag;
-	export let p=1;
+	export let p = 1;
 
 	const { session, page } = stores();
 	
 	let query;
 	let articles;
-	let articlesCount;
+	let articlesCount = 0;
 
 	$: {
 		const endpoint = tab === 'feed' ? 'articles/feed' : 'articles';
-		const page_size = tab === 'feed' ? 5 : 10;
-
-		let params = `limit=${page_size}&offset=${(p - 1) * page_size}`;
+		const page_size = tab === 'feed' ? 10 : 10;
+		if (isNaN(p)) {
+			p = 1;
+		}
+		console.log("p " + parseInt(p));
+		let params = `limit=${page_size}&offset=${(p-1) * page_size}`;
 		if (tab === 'tag') params += `&tag=${tag}`;
 		if (tab === 'profile') params += `&${favorites ? 'favorited' : 'author'}=${encodeURIComponent(username)}`;
 
 		query = `${endpoint}?${params}`;
+		console.log("query " + query);
 	}
 
 	$: query && getData();
@@ -32,7 +36,12 @@
 		articles = null;
 
 		// TODO do we need some error handling here?
+		console.log("query " + query);
 		({ articles, articlesCount } = await api.get(query, $session.user && $session.user.token));
+		if (articlesCount == undefined) {
+			articlesCount = 0;	
+		}
+		console.log("articlesCount" + articlesCount);		
 	}
 </script>
 

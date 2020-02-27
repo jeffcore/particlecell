@@ -21,6 +21,18 @@
 </script>
 
 <div class="article-preview">
+	<a href='/article/{article.slug}' rel='prefetch' class="preview-link">
+		<h1>{article.title}</h1>
+		<p>{article.description}</p>
+		<span>Read more...</span>
+		<ul class="tag-list">
+			{#each article.tagList as tag}
+				<li class="tag-default tag-pill tag-outline">
+					{tag}
+				</li>
+			{/each}
+		</ul>
+	</a>
 	<div class="article-meta">
 		<a href='/profile/@{article.author.username}'>
 			<img src={article.author.image} alt={article.author.username} />
@@ -42,17 +54,4 @@
 			</div>
 		{/if}
 	</div>
-
-	<a href='/article/{article.slug}' rel='prefetch' class="preview-link">
-		<h1>{article.title}</h1>
-		<p>{article.description}</p>
-		<span>Read more...</span>
-		<ul class="tag-list">
-			{#each article.tagList as tag}
-				<li class="tag-default tag-pill tag-outline">
-					{tag}
-				</li>
-			{/each}
-		</ul>
-	</a>
 </div>

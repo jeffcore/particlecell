@@ -1,5 +1,6 @@
 <script context="module">
 	import * as api from 'api.js';
+	import Nav from '../_components/Nav.svelte';
 
 	export async function preload({ params }) {
 		const { slug } = params;
@@ -30,6 +31,9 @@
 			comments = res.comments;
 		});
 	});
+
+	console.log("session use " + $session.user.token);
+	
 </script>
 
 <svelte:head>
@@ -38,18 +42,16 @@
 
 <div class="article-page">
 
-	<div class="banner">
+	<div class="">
 		<div class="container">
-			<h1>{article.title}</h1>
-			<ArticleMeta {article} user={$session.user}/>
+			<h1>{article.title}</h1>			
 		</div>
 	</div>
 
 	<div class="container page">
 		<div class="row article-content">
 			<div class="col-xs-12">
-				<div>{@html markup}</div>
-
+				<div>{@html markup}</div>				
 				<ul class="tag-list">
 					{#each article.tagList as tag}
 						<li class="tag-default tag-pill tag-outline">
@@ -59,12 +61,13 @@
 				</ul>
 			</div>
 		</div>
+		<ArticleMeta {article} user={$session.user}/>
 
 		<hr />
 
 		<div class="article-actions"></div>
-
-		<div class="row">
+		<Nav />
+		<div class="row">			
 			<CommentContainer {slug} {comments} user={$session.user} errors={commentErrors}/>
 		</div>
 	</div>
