@@ -21,7 +21,7 @@
 </script>
 
 <div class="article-preview">
-	<a href='/article/{article.slug}' rel='prefetch' class="preview-link">
+	<a href='/{article.slug}' rel='prefetch' class="preview-link">
 		<h1>{article.title}</h1>
 		<p>{article.description}</p>
 		<span>Read more...</span>

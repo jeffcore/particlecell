@@ -19,7 +19,7 @@
 		<ul class="nav nav-pills outline-active">
 			<li class="nav-item">
 				<a href="." class='nav-link {tab === "all" ? "active" : "" }' on:click='{globalfeed}'>
-					Global Feed
+					Recent Cells
 				</a>
 			</li>
 
